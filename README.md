@@ -7,6 +7,7 @@
 ###   2.数据集简介
 
 ​数据产生的场景是这样的，一些车主在自己的爱车遇到问题时，在汽车大师App上发起提问，专业技师会根据问题（Problem）和用户进行一段对话（Conversation），从而帮助用户解决问题，最后技师根据问题和对话生成一个报告(Report）。
+  ![image](https://github.com/mingdaoyang/workshop/blob/master/imges/20200430153435.jpg)
 
 ​        **整个数据集共有82000多行数据。**
 
