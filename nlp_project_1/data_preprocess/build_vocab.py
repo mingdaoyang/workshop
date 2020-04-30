@@ -37,7 +37,7 @@ def build_vocab(items, sort=True, min_count=0, lower=False):
         # sort by count
         dic = defaultdict(int) #先生成一个空字典dic，当dic的key不存在时，返回的是工厂函数的默认值，int为0
         for item in items:
-            for word in item.split(" "): #使用i很诡异,这里改成word
+            for word in item.split(' '): #使用i很诡异,这里改成word
                 word = word.strip()
                 if not word: continue #如果word不存在，跳过下两行操作
                 word = word if not lower else item.lower()

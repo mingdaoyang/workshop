@@ -32,7 +32,6 @@ def dump_pkl(vocab,pkl_path,overwrite=True):
             #-----------------------------------------------------------------------
             #protocol表示生成的二进制文件和不同的python版本之间的兼容性
             #例如，协议版本1是旧的二进制格式，它也与Python的早期版本兼容
-
         print('save %s ok' % pkl_path)
 
 def extract_sentences(train_x_path,train_y_path,test_x_path):#合并
@@ -46,8 +45,8 @@ def extract_sentences(train_x_path,train_y_path,test_x_path):#合并
 
 def save_sentence(lines,sentence_path):
     with open(sentence_path,'w',encoding='utf-8') as f:
-        for line in  lines:
-            f.write('%s\n' %  line.strip())
+        for line in lines:
+            f.write('%s\n' % line.strip())
     f.close()
 
 def build(train_x_path,train_y_path,test_x_path,out_path=None,sentence_path='',
@@ -57,7 +56,6 @@ def build(train_x_path,train_y_path,test_x_path,out_path=None,sentence_path='',
     w2v = Word2Vec(sentences=LineSentence(sentence_path),size=256,window=5,min_count=200,iter=5)
     w2v.wv.save_word2vec_format(w2v_bin_path,binary=True)
     model = KeyedVectors.load_word2vec_format(w2v_bin_path,binary=True)
-
 
 if __name__ == '__main__':
 
