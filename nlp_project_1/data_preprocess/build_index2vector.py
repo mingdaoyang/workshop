@@ -2,7 +2,6 @@ from gensim.models import KeyedVectors
 import json
 from collections import OrderedDict
 from annoy import AnnoyIndex
-from annoy import AnnoyIndex
 def built_vocab(input_modle_path):
     #加载二进制模型
     wv_model = KeyedVectors.load_word2vec_format(input_modle_path, binary=True)
