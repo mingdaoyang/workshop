@@ -129,3 +129,5 @@ dmypy.json
 /data
 /.idea
 /dataset/*.txt
+/data_preprocess/test.py
+README.md
