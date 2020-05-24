@@ -16,7 +16,7 @@ def load_data_from_file(path):
         for line in f:
             line = line.strip()
             lines.append(line)
-    print('[load_data_from_file] FINISHED! data.len:{} '.format(len(lines)))
+    print('[load_data_from_file] FINISHED! data_output.len:{} '.format(len(lines)))
     return lines
 
 
@@ -26,19 +26,21 @@ def save_data_to_file(data, path):
     :param data:字符串数组
     :param path:文件路径
     """
-    print('[save_data_to_file] ... data.len={}'.format(len(data)))
+    print('[save_data_to_file] ... data_output.len={}'.format(len(data)))
     with open(path, 'w', encoding='utf-8') as f:
         for line in data:
             f.write('{}\n'.format(line))
     print('[save_data_to_file] FINISHED! ---> {}'.format(path))
 
 
+from gensim.models import Word2Vec
+from gensim.models.word2vec import LineSentence
+
 def build_word2vec(sentens_path, w2v_path, w2v_bin_path, min_count=10, window=5, size=256, sg=1, iter=5):
     print('[build_word2vec] STARTED...')
     print('Train Model STARTED...')
-    w2v = Word2Vec(sg=sg, sentences=LineSentence(sentens_path), size=size, window=window, min_count=min_count,
-                   workers=multiprocessing.cpu_count(), iter=iter)
-
+    w2v = Word2Vec(sg=sg, sentences=LineSentence(sentens_path), size=size, window=window,
+                   min_count=min_count,iter=iter)
     print('Train Model FINISHED! \n Save Model STARTED!')
     w2v.wv.save_word2vec_format(w2v_path, binary=False)
     w2v.wv.save_word2vec_format(w2v_bin_path, binary=True)
@@ -53,14 +55,14 @@ def model_test(model, kw_1, kw_2):
     print('{} similar verbs contains：{}'.format(kw_2, model.similar_by_word(kw_2)))
 
 if __name__ == '__main__':
-    train_x_cut_file_path = '../data/train_x.txt'
-    train_y_cut_file_path = '../data/train_y.txt'
-    test_x_cut_file_path = '../data/test_x.txt'
+    train_x_cut_file_path = '../data_output/train_x.txt'
+    train_y_cut_file_path = '../data_output/train_y.txt'
+    test_x_cut_file_path = '../data_output/test_x.txt'
 
     # gen
-    all_cut_lines_file_path = '../data/all_cut_file_path.txt'
-    word2vec_file_path = '../data/word2vec.txt'
-    word2vec_bin_file_path = '../data/word2vec_bin.txt'
+    all_cut_lines_file_path = '../data_output/all_cut_file_path.txt'
+    word2vec_file_path = '../data_output/word2vec.txt'
+    word2vec_bin_file_path = '../data_output/word2vec_bin.txt'
 
     all_cut_lines = []
     all_cut_lines += load_data_from_file(train_x_cut_file_path)
@@ -71,7 +73,6 @@ if __name__ == '__main__':
 
     build_word2vec(all_cut_lines_file_path, word2vec_file_path, word2vec_bin_file_path,
                    min_count=100, window=5, size=256, sg=1, iter=5)
-
     # tests :
     w2v_model = KeyedVectors.load_word2vec_format(word2vec_bin_file_path, binary=True)
     model_test(w2v_model, '宝马', '奔驰')

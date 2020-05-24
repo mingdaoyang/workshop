@@ -35,13 +35,12 @@ def dump_pkl(vocab,pkl_path,overwrite=True):
         print('save %s ok' % pkl_path)
 
 def extract_sentences(train_x_path,train_y_path,test_x_path):#合并
-    ret = []
+
     lines = readlines(train_x_path)
     lines += readlines(train_y_path)
     lines += readlines(test_x_path)
-    for line in lines:
-        ret.append(line)
-    return  ret
+
+    return  lines
 
 def save_sentence(lines,sentence_path):
     with open(sentence_path,'w',encoding='utf-8') as f:
@@ -53,14 +52,14 @@ def build(train_x_path,train_y_path,test_x_path,out_path=None,sentence_path='',
          w2v_bin_path='w2v.bin',min_count=100 ):
     sentences = extract_sentences(train_x_path,train_y_path,test_x_path)
     save_sentence(sentences,sentence_path)
-    w2v = Word2Vec(sentences=LineSentence(sentence_path),size=256,window=5,min_count=200,iter=5)
+    w2v = Word2Vec(sentences=LineSentence(sentence_path),size=256,window=5,min_count=100,iter=5)
     w2v.wv.save_word2vec_format(w2v_bin_path,binary=True)
     model = KeyedVectors.load_word2vec_format(w2v_bin_path,binary=True)
 
 if __name__ == '__main__':
 
-    build(train_x_path='../data/train_x.txt',
-          train_y_path='../data/train_y.txt',
-          test_x_path='../data/test_x.txt',
-          out_path='../data/word2vec.txt',
-          sentence_path='../data/sentences.txt')
+    build(train_x_path='../data_output/train_x.txt',
+          train_y_path='../data_output/train_y.txt',
+          test_x_path='../data_output/test_x.txt',
+          out_path='../data_output/word2vec.txt',
+          sentence_path='../data_output/sentences.txt')

@@ -39,4 +39,4 @@
     ```
     最后生成{index->vector}的一个dict，这样就可以作为S2S等后续需要学习模型的embedding层。
     
-###  5.Seq2Seq模型的使用(To be continued this week)
+###  5.Seq2Seq模型的使用()

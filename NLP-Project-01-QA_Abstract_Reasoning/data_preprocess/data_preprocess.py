@@ -142,4 +142,5 @@ def save_data(data_1,data_2,data_3,data_path_1,data_path_2,data_path_3,stop_word
 if __name__ =='__main__':
 
     train_x,train_y,test_x,_ = parse_data('../dataset/AutoMaster_TrainSet.csv','../dataset/AutoMaster_TestSet.csv')
-    save_data(train_x,train_y,test_x,'../data/train_x.txt','../data/train_y.txt','../data/test_x.txt',stop_words_path = '../dataset/stop_words.txt')
+    save_data(train_x, train_y, test_x, '../data_output/train_x.txt', '../data_output/train_y.txt',
+              '../data_output/test_x.txt', stop_words_path ='../dataset/stop_words.txt')

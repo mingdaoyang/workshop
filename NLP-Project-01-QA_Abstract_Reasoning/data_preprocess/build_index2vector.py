@@ -30,7 +30,7 @@ def bulit_wv_index(input_model_path):
     for counter, key in enumerate(wv_model.vocab.keys()):
         word_index[key] = counter
     # 写入json文件
-    with open('../data/word_index.json', 'w') as fp:
+    with open('../data_output/word_index.json', 'w') as fp:
         json.dump(word_index, fp)
     # 通过Annoy算法建立索引树，256为词向量长度
     wv_index = AnnoyIndex(256, metric='angular') # ?
@@ -61,10 +61,16 @@ def get_similar_words(word_index,wv_index,kw,similar_word_num):
 if __name__ == '__main__':
 
     w2v_path = 'w2v.bin'
-    save_path = '../data/word_index.index'
+    save_path = '../data_output/word_index.index'
     key_words=['宝马','维修','发动机']
     word_index,wv_index=bulit_wv_index(w2v_path)
     save_wv_index_file(wv_index,save_path)
     for key_word in key_words:
         get_similar_words(word_index,wv_index,key_word,10)
+
+    with open('../data_output/word_index.json', 'r', encoding='utf-8') as f:
+        for line in f:
+            line.split()
+            print('\n')
+            print(line)
 

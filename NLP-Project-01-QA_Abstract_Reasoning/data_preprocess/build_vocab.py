@@ -12,7 +12,7 @@ def read_data(path_1, path_2, path_3):
             open(path_3, 'r', encoding='utf-8') as f3:
         words = []
         for line in f1:
-            words = line.split()
+            words += line.split()
 
         for line in f2:
             words += line.split(' ')
@@ -61,8 +61,8 @@ def build_vocab(items, sort=True, min_count=0, lower=False):
     return vocab, reverse_vocab
 
 if __name__ == '__main__':
-    lines = read_data('../data/train_x.txt',
-                      '../data/train_y.txt',
-                      '../data/test_x.txt')
+    lines = read_data('../data_output/train_x.txt',
+                      '../data_output/train_y.txt',
+                      '../data_output/test_x.txt')
     vocab, reverse_vocab = build_vocab(lines)
-    save_word_dict(vocab, '../data/vocab.txt')
+    save_word_dict(vocab, '../data_output/vocab.txt')
